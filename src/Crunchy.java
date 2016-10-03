@@ -62,37 +62,23 @@ public class Crunchy
     {
         try
         {
-            // loop for each requested length
-            for (int max = this.min; max <= this.max; ++max)
+            long crunching = alphabet.length; for (int i = 0; i < max; ++i) crunching *= alphabet.length;
+            long crunched = 0; // start at 1 to account for initial output
+
+            // no work was requested, bail
+            if (crunching < alphabet.length) System.exit(0);
+
+            d("crunching: " + crunching);
+
+            // loop for each requested length of output, min -> max
+            for (int len = min; len <= max; ++len)
             {
                 // create reusable output holder initialized to first letter of alphabet and len = max
-                final StringBuilder output = new StringBuilder(new String(new char[max]).replace('\0', alphabet[0]));
+                final StringBuilder output = new StringBuilder(new String(new char[len]).replace('\0', alphabet[0]));
 
-                d("initialOutput: " + output);
+                
 
-                // for each symbol in alphabet, perform crunch routine
-                for (int maxSymbol = 0; maxSymbol < alphabet.length; ++maxSymbol)
-                {
-                    int outerOffset = max;
-                    while (--outerOffset >= 0)
-                    {
-                        // reset incomplete search portion to initial values
-                        for (int i = outerOffset; i < max; ++i) output.setCharAt(i, alphabet[maxSymbol]);
-
-                        // iterate over alphabet once per position of output
-                        for (int innerOffset = outerOffset+1; innerOffset < max; ++innerOffset)
-                        {
-                            // iterate over all symbols of alphabet
-                            for (int symbol = 1; symbol < alphabet.length; ++symbol)
-                            {
-                                output.setCharAt(innerOffset, alphabet[symbol]);
-                                o( output.toString() );
-                            }
-                        }
-                    }
-                }
-
-                d("finalOutput: " + output);
+                d("crunched: " + crunched + " / " + crunching);
             }
         }
         catch (Throwable t)
@@ -117,7 +103,7 @@ public class Crunchy
         final int max = args.length < 2 ? min : Integer.parseInt( args[1] );
 
         // prepare to crunch
-        final String alphabet = args.length < 3 ? alphaLower : args[2].replaceAll("(.)\0", "\0");
+        final String alphabet = args.length < 3 ? alphaLower : args[2].replaceAll("(.)\\1", "$1");
         final boolean debugMode = args.length < 4 ? false : Boolean.parseBoolean(args[3]);
 
         // crunch
