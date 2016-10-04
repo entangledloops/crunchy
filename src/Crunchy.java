@@ -1,5 +1,3 @@
-import java.util.concurrent.atomic.AtomicInteger;
-
 /**
  * Created by snd on 10/3/16.
  */
@@ -63,6 +61,9 @@ public class Crunchy
     {
         try
         {
+            long crunchingTotal = 0;
+            long crunchedTotal = 0;
+
             // loop for each requested length of output, min -> max
             for (int len = min; len <= max; ++len)
             {
@@ -98,7 +99,16 @@ public class Crunchy
                     }
 
                 } while (crunched < crunching);
+
+                if (debugMode)
+                {
+                    crunchingTotal += crunching;
+                    crunchedTotal += crunched;
+                }
             }
+
+            // basic stats report
+            d(crunchedTotal + " / " + crunchingTotal + " variations crunched");
         }
         catch (Throwable t)
         {
