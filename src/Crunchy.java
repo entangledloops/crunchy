@@ -74,7 +74,7 @@ public class Crunchy
                 // create reusable output holder initialized to first letter of alphabet and len = max
                 final StringBuilder output = new StringBuilder(new String(new char[len]).replace('\0', alphabet[0]));
 
-                // output and record initial state
+                // output initial state
                 o( output.toString() );
 
                 // calculate all variations
