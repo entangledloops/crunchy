@@ -33,7 +33,7 @@ public class Crunchy
     {
         this.min = min;
         this.max = max;
-        this.alphabet = alphabet.toCharArray();
+        this.alphabet = alphabet.toCharArray(); /// @TODO allow symbols to be strings for variable size alphabets, such as dictionary combinations
         this.debugMode = debugMode;
 
         d(
@@ -81,7 +81,7 @@ public class Crunchy
                 int cur = len;
                 do
                 {
-                    // initial state
+                    // will hold index of currently-updating symbol position
                     int curIndex = 0;
 
                     // locate current char
