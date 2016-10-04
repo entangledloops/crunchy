@@ -118,19 +118,25 @@ public class Crunchy
     {
         if (args.length < 1)
         {
-            e("You must provide at least max length to crunch.");
+            e("Crunch [minLen] maxLen [alphabet=" + alphaLower + "] [debugMode=false]");
             System.exit(1);
         }
 
-        // parse args
-        final int min = Integer.parseInt( args[0] );
-        final int max = args.length < 2 ? min : Integer.parseInt( args[1] );
+        try
+        {
+            // parse args
+            final int min = Integer.parseInt(args[0]);
+            final int max = args.length < 2 ? min : Integer.parseInt(args[1]);
+            final String alphabet = args.length < 3 ? alphaLower : args[2].replaceAll("(.)\\1", "$1");
+            final boolean debugMode = args.length < 4 ? false : Boolean.parseBoolean(args[3]);
 
-        // prepare to crunch
-        final String alphabet = args.length < 3 ? alphaLower : args[2].replaceAll("(.)\\1", "$1");
-        final boolean debugMode = args.length < 4 ? false : Boolean.parseBoolean(args[3]);
-
-        // crunch
-        new Crunchy(min, max, alphabet, debugMode).crunch();
+            // crunch
+            new Crunchy(min, max, alphabet, debugMode).crunch();
+        }
+        catch (Throwable t)
+        {
+            e(t);
+            System.exit(2);
+        }
     }
 }
