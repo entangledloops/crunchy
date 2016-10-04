@@ -49,11 +49,11 @@ public class Crunchy
 
     // simple static wrappers
     private static void o(String s) { System.out.print(s + "\n"); }
-    private static void e(String s) { System.err.println(s); }
+    private static void e(String s) { System.err.print(s + "\n"); }
     private static void e(Throwable t) { t.printStackTrace(); }
 
     // d() isn't static b/c debug mode depends on the state of this.debugMode
-    private void d(String s) { if (debugMode) System.out.println(s); }
+    private void d(String s) { if (debugMode) System.out.print(s + "\n"); }
 
     /**
      * driver
@@ -94,7 +94,7 @@ public class Crunchy
                         cur = len; // reset position to start after a change at max pos.
 
                         ++crunched;
-                        o(output.toString());
+                        o( output.toString() );
                     }
 
                 } while (crunched < crunching);
