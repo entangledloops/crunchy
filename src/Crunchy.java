@@ -48,7 +48,7 @@ public class Crunchy
     // logging methods
 
     // simple static wrappers
-    private static void o(String s) { System.out.println(s); }
+    private static void o(String s) { System.out.print(s + "\n"); }
     private static void e(String s) { System.err.println(s); }
     private static void e(Throwable t) { t.printStackTrace(); }
 
@@ -65,6 +65,7 @@ public class Crunchy
             // loop for each requested length of output, min -> max
             for (int len = min; len <= max; ++len)
             {
+                // calculate total expected output
                 long crunching = alphabet.length; for (int i = 1; i < len; ++i) crunching *= alphabet.length;
                 long crunched = 0; // start at 1 to account for initial output
 
@@ -88,17 +89,15 @@ public class Crunchy
                     // ensure valid char could be located
                     if (cur >= 0)
                     {
-                        output.setCharAt(cur, alphabet[curIndex+1]);
-                        for (int i = len-1; i > cur; --i) output.setCharAt(i, alphabet[0]);
-                        cur = len;
+                        output.setCharAt(cur, alphabet[curIndex+1]); // increment max symbol
+                        for (int i = len-1; i > cur; --i) output.setCharAt(i, alphabet[0]); // reset symbols after cur pos
+                        cur = len; // reset position to start after a change at max pos.
 
                         ++crunched;
                         o(output.toString());
                     }
 
                 } while (crunched < crunching);
-
-                d("\ncrunched: " + crunched + " / " + crunching + "\n");
             }
         }
         catch (Throwable t)
