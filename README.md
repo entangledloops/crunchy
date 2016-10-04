@@ -1,6 +1,6 @@
 # Crunchy
 
-A simplified, iterative Java implementation of the Linux crunch tool.
+A simplified, iterative Java implementation of the Linux [crunch](https://sourceforge.net/projects/crunch-wordlist/files/crunch-wordlist/) tool.
 
 Standard crunch is well-written, however it's also:
 
