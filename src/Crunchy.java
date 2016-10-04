@@ -67,13 +67,12 @@ public class Crunchy
             {
                 // calculate total expected output
                 long crunching = alphabet.length; for (int i = 1; i < len; ++i) crunching *= alphabet.length;
-                long crunched = 0; // start at 1 to account for initial output
+                long crunched = 1; // start at 1 to account for initial output
 
                 // create reusable output holder initialized to first letter of alphabet and len = max
                 final StringBuilder output = new StringBuilder(new String(new char[len]).replace('\0', alphabet[0]));
 
                 // output and record initial state
-                ++crunched;
                 o( output.toString() );
 
                 // calculate all variations
