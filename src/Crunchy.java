@@ -90,10 +90,11 @@ public class Crunchy
                     // ensure valid char could be located
                     if (cur >= 0)
                     {
-                        ++crunched;
                         output.setCharAt(cur, alphabet[curIndex+1]);
-                        o(output.toString());
                         for (int i = len-1; i > cur; --i) output.setCharAt(i, alphabet[0]);
+
+                        ++crunched;
+                        o(output.toString());
                     }
 
                 } while (crunched < crunching);
