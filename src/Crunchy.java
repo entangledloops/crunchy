@@ -62,17 +62,14 @@ public class Crunchy
     {
         try
         {
-            long crunching = alphabet.length; for (int i = 1; i < max; ++i) crunching *= alphabet.length;
-            long crunched = 0; // start at 1 to account for initial output
-
-            // no work was requested, bail
-            if (crunching < alphabet.length) System.exit(0);
-
-            d("crunching: " + crunching);
-
             // loop for each requested length of output, min -> max
             for (int len = min; len <= max; ++len)
             {
+                long crunching = alphabet.length; for (int i = 1; i < len; ++i) crunching *= alphabet.length;
+                long crunched = 0; // start at 1 to account for initial output
+
+                d("crunching: " + crunching);
+
                 // create reusable output holder initialized to first letter of alphabet and len = max
                 final StringBuilder output = new StringBuilder(new String(new char[len]).replace('\0', alphabet[0]));
 
@@ -83,18 +80,20 @@ public class Crunchy
                 // calculate all variations
                 do
                 {
-                    int cur = max;
+                    // initial state
+                    int cur = len;
                     int curIndex = 0;
 
                     // locate current char
                     while (--cur >= 0 && ((curIndex = indexOf( output.charAt(cur) ))+1) >= alphabet.length) ;
 
+                    // ensure valid char could be located
                     if (cur >= 0)
                     {
                         ++crunched;
                         output.setCharAt(cur, alphabet[curIndex+1]);
                         o(output.toString());
-                        for (int i = max-1; i > cur; --i) output.setCharAt(i, alphabet[0]);
+                        for (int i = len-1; i > cur; --i) output.setCharAt(i, alphabet[0]);
                     }
 
                 } while (crunched < crunching);
