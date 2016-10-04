@@ -127,8 +127,8 @@ public class Crunchy
             // parse args
             final int min = Integer.parseInt(args[0]);
             final int max = args.length < 2 ? min : Integer.parseInt(args[1]);
-            final String alphabet = args.length < 3 ? alphaLower : args[2].replaceAll("(.)\\1", "$1");
-            final boolean debugMode = args.length < 4 ? false : Boolean.parseBoolean(args[3]);
+            final String alphabet = args.length < 3 ? alphaLower : args[2].replace("alphabet=", "").replaceAll("(.)\\1", "$1");
+            final boolean debugMode = args.length < 4 ? false : Boolean.parseBoolean(args[3].replace("debugMode=", ""));
 
             // crunch
             new Crunchy(min, max, alphabet, debugMode).crunch();
