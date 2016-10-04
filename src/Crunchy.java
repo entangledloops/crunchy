@@ -13,6 +13,7 @@ public class Crunchy
     private static final String alphaLowerCommon = "etaoinshrdlcumwfgypbvkjxqz";
     private static final String alphaUpperCommon = alphaLowerCommon.toUpperCase();
     private static final String digits = "0123456789";
+    private static final String defaultAlphabet = alphaLower;
 
     ///////////////////////////////////////////////////////////////////////////
     // member vars
@@ -118,7 +119,7 @@ public class Crunchy
     {
         if (args.length < 1)
         {
-            e("Crunch [minLen] maxLen [alphabet=" + alphaLower + "] [debugMode=false]");
+            e("Crunch [minLen] maxLen [alphabet=" + defaultAlphabet + "] [debugMode=false]");
             System.exit(1);
         }
 
@@ -127,7 +128,7 @@ public class Crunchy
             // parse args
             final int min = Integer.parseInt(args[0]);
             final int max = args.length < 2 ? min : Integer.parseInt(args[1]);
-            final String alphabet = args.length < 3 ? alphaLower : args[2].replace("alphabet=", "").replaceAll("(.)\\1", "$1");
+            final String alphabet = args.length < 3 ? defaultAlphabet : args[2].replace("alphabet=", "").replaceAll("(.)\\1", "$1");
             final boolean debugMode = args.length < 4 ? false : Boolean.parseBoolean(args[3].replace("debugMode=", ""));
 
             // crunch
