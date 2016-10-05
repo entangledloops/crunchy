@@ -12,7 +12,7 @@ While crunch is highly optimized, this iterative Java implementation competes ag
 
 This Java version:
 
- - scales linearly due to JVM overhead (generally adds seconds to timed tests)
+ - scales linearly w/respect to original crunch (+ JVM overhead, generally adds seconds)
  - neither prints any statistics nor has a 3 second delay prior to launch
  - does not currently implement most of the various options available w/standard crunch
 
