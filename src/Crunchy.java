@@ -78,21 +78,21 @@ public class Crunchy
                 o( output.toString() );
 
                 // calculate all variations
-                int cur, curIndex;
+                int curIndex, curSymbol;
                 do
                 {
                     // will hold index of currently-updating symbol position
-                    cur = len;
-                    curIndex = 0;
+                    curIndex = len;
+                    curSymbol = 0;
 
                     // locate current char
-                    while (--cur >= 0 && ((curIndex = indexOf( output.charAt(cur) ))+1) >= alphabet.length) ;
+                    while (--curIndex >= 0 && ((curSymbol = indexOf( output.charAt(curIndex) ))+1) >= alphabet.length) ;
 
                     // ensure valid char could be located
-                    if (cur >= 0)
+                    if (curIndex >= 0)
                     {
-                        output.setCharAt(cur, alphabet[curIndex+1]); // increment max symbol
-                        for (int i = len-1; i > cur; --i) output.setCharAt(i, alphabet[0]); // reset symbols after cur pos
+                        output.setCharAt(curIndex, alphabet[curSymbol+1]); // increment max symbol
+                        for (int i = len-1; i > curIndex; --i) output.setCharAt(i, alphabet[0]); // reset symbols after cur pos
 
                         ++crunched;
                         o( output.toString() );
