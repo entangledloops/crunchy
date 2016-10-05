@@ -78,7 +78,7 @@ public class Crunchy
                 o( output.toString() );
 
                 // calculate all variations
-                int cur = len, curIndex;
+                int cur, curIndex;
                 do
                 {
                     // will hold index of currently-updating symbol position
